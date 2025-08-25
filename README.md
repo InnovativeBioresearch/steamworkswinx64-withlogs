@@ -1,6 +1,6 @@
 # steamworkswinx64-withlogs
 
-A modified version of [steamworks.js](https://github.com/ceifa/steamworks.js) tailored for Windows x64, enhanced with additional logging for debugging Steam API integration in Electron applications. This module is designed for developers working on Windows x64 environments who need robust Steamworks functionality with detailed diagnostic logs. I developed this features when publishing my electron html5 game on Steam. Author: Jonathan Fior. 
+A modified version of [steamworks.js](https://github.com/ceifa/steamworks.js) tailored for Windows x64, enhanced with additional logging for debugging Steam API integration in Electron applications. This module is designed for developers working on Windows x64 environments who need robust Steamworks functionality with detailed diagnostic logs.
 
 ## Features 
 
@@ -39,5 +39,3 @@ console.log('Achievement ACH_TEST status:', steam.achievement.isActivated('ACH_T
 // Note: Avoid calling steamworks.electronEnableSteamOverlay() until overlay issues are resolved
 
 ```
-
-
