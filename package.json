@@ -1,6 +1,6 @@
 {
     "name": "steamworkswinx64-withlogs",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "main": "index.js",
     "types": "index.d.ts",
     "description": "Steamworks.js with additional logging for Windows x64",
