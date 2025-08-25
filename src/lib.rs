@@ -4,8 +4,10 @@ use steamworks::AppId;
 use steamworks::Client;
 use steamworks::SteamAPIInitError;
 use std::env;
-use std::path::Path;
-use steamworks_sys; // Added for SteamAPI_IsSteamRunning
+use steamworks_sys;
+use winapi::um::libloaderapi::{GetModuleHandleW, GetModuleFileNameW};
+use std::os::windows::ffi::{OsStringExt, OsStrExt};
+use std::ffi::{OsString, OsStr};
 
 pub mod client;
 
@@ -23,30 +25,9 @@ pub fn init(app_id: Option<u32>) -> Result<(), Error> {
         println!("Rust: Is Steam running? {}", steamworks_sys::SteamAPI_IsSteamRunning());
     }
 
-    // Check for steam_api64.dll in multiple relative locations
-    let possible_paths = vec![
-        Path::new("steam_api64.dll"), // Current working directory
-        Path::new("./node_modules/electron/dist/steam_api64.dll"), // Electron dist folder
-        Path::new("../my-game-electron/steam_api64.dll"), // Project root
-        Path::new("../my-game-electron/node_modules/electron/dist/steam_api64.dll"), // Project Electron dist
-        Path::new("./node_modules/steamworks.js/dist/win64/steam_api64.dll"), // Bundled DLL
-    ];
-
-    for path in possible_paths {
-        if path.exists() {
-            println!("Rust: Found steam_api64.dll at: {:?}", path.canonicalize().unwrap_or_default());
-        } else {
-            println!("Rust: steam_api64.dll not found at: {:?}", path);
-        }
-    }
-
-    if client::has_client() {
-        client::drop_client();
-    }
-
+    println!("Rust: Attempting to initialize with AppId: {:?}", app_id);
     let steam_client = app_id
         .map(|app_id| {
-            println!("Rust: Attempting to initialize with AppId: {}", app_id);
             Client::init_app(AppId(app_id))
         })
         .unwrap_or_else(|| {
@@ -62,6 +43,22 @@ pub fn init(app_id: Option<u32>) -> Result<(), Error> {
             println!("Rust: SteamAPI_Init failed with error: {}", error_msg);
             Error::from_reason(error_msg)
         })?;
+
+    // Get the path of the loaded steam_api64.dll
+    let dll_name = OsStr::new("steam_api64.dll");
+    let mut path_buffer: [u16; 260] = [0; 260]; // MAX_PATH = 260
+    unsafe {
+        let handle = GetModuleHandleW(dll_name.encode_wide().chain(std::iter::once(0)).collect::<Vec<u16>>().as_ptr());
+        if handle.is_null() {
+            return Err(Error::from_reason("Failed to get steam_api64.dll handle".to_string()));
+        }
+        let len = GetModuleFileNameW(handle, path_buffer.as_mut_ptr(), path_buffer.len() as u32);
+        if len == 0 {
+            return Err(Error::from_reason("Failed to get steam_api64.dll path".to_string()));
+        }
+        let dll_path = OsString::from_wide(&path_buffer[..len as usize]);
+        println!("Rust: Found steam_api64.dll at: {:?}", dll_path);
+    }
 
     steam_client.user_stats().request_current_stats();
     // Log overlay status
