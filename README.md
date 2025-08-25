@@ -12,7 +12,7 @@ Rust: SteamAPI_Init succeeded).
 - **Steam Overlay Support**: Retains `electronEnableSteamOverlay` for potential future use, though not currently recommended due to known issues (not enabled by default in example usage).
 - **Full Steamworks API**: Provides access to all `steamworks.js` features, including achievements, matchmaking, networking, and more, as detailed in the [steamworks.js documentation](https://github.com/ceifa/steamworks.js).
 
-## Installation and usage
+## Installation 
 
 The module includes all required files and node modules for immediate use on Windows x64. No additional npm install is needed to use the module, as it includes pre-built binaries. The pre-built dist\win64 files (dist\win64\steam_api64.dll, dist\win64\steam_api64.lib, dist\win64\steamworksjs.win32-x64-msvc.node) ensure the module works immediately on Windows x64 without additional installations for runtime use. Build is also not needed. 
 
@@ -20,9 +20,11 @@ To install in your project:
 
 ```bash
 npm install steamworkswinx64-withlogs
+```
 
+## Usage
 
-Usage: 
+```bash
 
 const steamworks = require('steamworkswinx64-withlogs');
 
@@ -35,5 +37,7 @@ console.log('Activated achievement: ACH_TEST');
 console.log('Achievement ACH_TEST status:', steam.achievement.isActivated('ACH_TEST') ? 'Unlocked' : 'Locked');
 
 // Note: Avoid calling steamworks.electronEnableSteamOverlay() until overlay issues are resolved
+
+```
 
 
