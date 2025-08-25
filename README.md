@@ -14,7 +14,7 @@ Rust: SteamAPI_Init succeeded).
 
 ## Installation 
 
-The module includes all required files and node modules for immediate use on Windows x64. No additional npm install is needed to use the module, as it includes pre-built binaries. The pre-built dist\win64 files (dist\win64\steam_api64.dll, dist\win64\steam_api64.lib, dist\win64\steamworksjs.win32-x64-msvc.node) ensure the module works immediately on Windows x64 without additional installations for runtime use. Build is also not needed. 
+The module includes all required files for immediate use on Windows x64. No additional npm install is needed to use the module, as it includes pre-built binaries. The pre-built dist\win64 files (dist\win64\steam_api64.dll, dist\win64\steam_api64.lib, dist\win64\steamworksjs.win32-x64-msvc.node) ensure the module works immediately on Windows x64 without additional installations for runtime use. Build is also not needed. 
 
 To install in your project:
 
