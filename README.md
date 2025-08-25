@@ -1,11 +1,10 @@
 # steamworkswinx64-withlogs
 
-A modified version of [steamworks.js](https://github.com/ceifa/steamworks.js) tailored for Windows x64, enhanced with additional logging for debugging Steam API integration in Electron applications. This module is designed for developers working on Windows x64 environments who need robust Steamworks functionality with detailed diagnostic logs.
+A modified version of [steamworks.js](https://github.com/ceifa/steamworks.js) with additional logging for Windows x64, including environment details, DLL loading, and Steam API initialization. This module is designed for developers working on Windows x64 environments who need robust Steamworks functionality with detailed diagnostic logs.
 
 ## Features 
 
-- **Enhanced Logging**: Includes detailed debug logs for environment details, DLL loading (e.g., `steam_api64.dll`), and Steam API initialization, helping diagnose issues like `ERR_DLOPEN_FAILED` or `[API loaded no]`(e.g., Rust: Found steam_api64.dll at: "...\node_modules\steamworkswinx64-withlogs\dist\win64\steam_api64.dll"
-Rust: SteamAPI_Init succeeded).
+- **Enhanced Logging**: Uses winapi to log the exact path of the loaded steam_api64.dll, along with environment details and Steam API initialization, to diagnose issues like [ERR_DLOPEN_FAILED] (e.g., Rust: Found steam_api64.dll at: "C:\...\node_modules\steamworkswinx64-withlogs\dist\win64\steam_api64.dll", Rust: SteamAPI_Init succeeded).
 - **Windows x64 Only**: Optimized exclusively for Windows x64, ensuring compatibility with `steamworksjs.win32-x64-msvc.node` and the customized `steam_api64.dll`.
 - **Pre-Built Binaries**: Ships with all necessary files, including `dist\win64\steam_api64.dll`, `steam_api64.lib`, and `steamworksjs.win32-x64-msvc.node`, so no `npm install` is required for dependencies to use the module in your project.
 - **Rebuild Support**: Includes source files (`src`, `Cargo.toml`, `build.js`, `sdk/redistributable_bin`) for users who want to rebuild the module using `npm run build`, though this is optional as pre-built binaries are provided.
