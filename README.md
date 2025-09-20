@@ -1,10 +1,11 @@
 # steamworkswinx64-withlogs
 
-A modified version of [steamworks.js](https://github.com/ceifa/steamworks.js) with additional logging for Windows x64, including environment details, DLL loading, and Steam API initialization. This module is designed for developers working on Windows x64 environments who need robust Steamworks functionality with detailed diagnostic logs.
+A modified version of [steamworks.js](https://github.com/ceifa/steamworks.js) with additional logging for Windows x64, including environment details, DLL loading, and Steam API initialization, and expanded P2P networking capabilities. This module enhances your Steamworks integration with detailed diagnostics and a new `closeP2PSession` API for seamless multiplayer session management, perfect for developers building robust Steam games. Written by Jonathan Fior at Innovative Bioresearch. 
 
 ## Features 
 
 - **Enhanced Logging**: Uses winapi to log the exact path of the loaded steam_api64.dll, along with environment details and Steam API initialization, to diagnose issues like [ERR_DLOPEN_FAILED] (e.g., Rust: Found steam_api64.dll at: "C:\...\node_modules\steamworkswinx64-withlogs\dist\win64\steam_api64.dll", Rust: SteamAPI_Init succeeded).
+- **New P2P Session Control**: Introduces closeP2PSession (new in v0.0.3), a custom export missing from steamworks.js, enabling seamless P2P session cleanup for buttery-smooth multiplayer. Powered by the Rust steamworks crate’s Networking::close_p2p_session.
 - **Windows x64 Only**: Optimized exclusively for Windows x64, ensuring compatibility with `steamworksjs.win32-x64-msvc.node` and the customized `steam_api64.dll`.
 - **Pre-Built Binaries**: Ships with all necessary files, including `dist\win64\steam_api64.dll`, `steam_api64.lib`, and `steamworksjs.win32-x64-msvc.node`, so no `npm install` is required for dependencies to use the module in your project.
 - **Rebuild Support**: Includes source files (`src`, `Cargo.toml`, `build.js`, `sdk/redistributable_bin`) for users who want to rebuild the module using `npm run build`, though this is optional as pre-built binaries are provided.
