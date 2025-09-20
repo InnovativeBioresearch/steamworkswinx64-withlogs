@@ -93,4 +93,13 @@ pub mod networking {
             .networking()
             .accept_p2p_session(SteamId::from_raw(steam_id64.get_u64().1));
     }
+    //START ALPHA CHANGE 32 -- export close_p2p_session to JS (tears down the P2P session with a user)
+    #[napi]
+    pub fn close_p2p_session(steam_id64: BigInt) {
+        let client = crate::client::get_client();
+        client
+            .networking()
+            .close_p2p_session(SteamId::from_raw(steam_id64.get_u64().1));
+    }
+    //FINISH ALPHA CHANGE 32 -- export close_p2p_session to JS
 }
