@@ -1,9 +1,9 @@
 {
     "name": "steamworkswinx64-withlogs",
-    "version": "0.0.2",
+    "version": "0.0.4",
     "main": "index.js",
     "types": "index.d.ts",
-    "description": "Steamworks.js with additional logging for Windows x64",
+    "description": "Steamworks.js with additional logging and P2P session control for Windows x64",
     "author": "Jonathan Fior -- Innovative Bioresearch",
     "license": "MIT",
     "napi": {
@@ -28,6 +28,7 @@
         "build.js",
         "src/lib.rs",
         "src/client.rs",
+        "src/api/",
         "README.md"
     ],
     "dependencies": {
